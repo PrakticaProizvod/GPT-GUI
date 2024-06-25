@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import scrolledtext
 import ttkbootstrap as ttk
 import backend
+import threading
 
 
 class ChatBot:
@@ -30,6 +31,9 @@ class ChatBot:
 
         self.entry.delete(0, tk.END)
 
+        threading.Thread(target=self.get_response, args=(message,)).start()
+
+    def get_response(self, message):
         response = backend.get_response(message)
         self.chat_log.insert(tk.END, "ChatGPT: " + response + "\n")
 
