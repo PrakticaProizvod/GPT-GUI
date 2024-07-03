@@ -2,7 +2,8 @@ import tkinter as tk
 import ttkbootstrap as ttk
 import backend
 import threading
-from PIL import Image, ImageDraw, ImageTk
+from PIL import Image, ImageTk
+import os
 
 
 class ChatBot:
@@ -31,27 +32,25 @@ class ChatBot:
 
         self.entry.delete(0, tk.END)
 
-        threading.Thread(target=self.get_response, args=(message,)).start()
+        if message.startswith("/photo"):
+            threading.Thread(target=self.get_response_image, args=(message[6:],)).start()
+        else:
+            threading.Thread(target=self.get_response, args=(message,)).start()
 
     def get_response(self, message):
-        response = backend.get_response_text(message)
-        self.chat_log.insert(tk.END, "ChatGPT: " + response + "\n")
+        response_text = backend.get_response_text(message)
+        self.chat_log.insert(tk.END, "ChatGPT: " + response_text + "\n")
 
-        image = self.generate_image(response)
-        self.display_image(image)
-
-    def generate_image(self, text):
-        img = Image.new('RGB', (400, 200), color='white')
-        d = ImageDraw.Draw(img)
-        d.text((10, 10), text, fill=(0, 0, 0))
-
-        img_tk = ImageTk.PhotoImage(img)
-
-        return img_tk
-
-    def display_image(self, image):
-        self.chat_log.image_create(tk.END, image=image)
+    def get_response_image(self, message):
+        backend.get_response_photo(message)
+        image = Image.open("image.png")
+        photo = ImageTk.PhotoImage(image)
+        label = tk.Label(self.chat_log, image=photo)
+        label.image = photo
+        self.chat_log.window_create(tk.END, window=label)
         self.chat_log.insert(tk.END, "\n")
+
+        os.remove("image.png")
 
 
 def main():
