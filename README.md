@@ -8,13 +8,14 @@
 + оплачиваем
 + переходим во вкладку - https://console.proxyapi.ru/keys
 + нажимаем создать API ключ
-+ далее вставляем в файл .env в переменную key свой api ключ, который получили
   
 
 
 **Загрузка**
 
 git clone https://github.com/PrakticaProizvod/python-GPT-GUI
+
+далее вставляем в файл .env в переменную key свой api ключ, который получили
 
 pip3 install -r requirements.txt
 
