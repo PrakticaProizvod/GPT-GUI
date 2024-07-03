@@ -1,10 +1,14 @@
 import openai
-from api import key
+import os
+
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
-def get_response(message):
+def get_response_text(message):
     client = openai.OpenAI(
-        api_key=f"{key}",
+        api_key=f"{os.getenv('key')}",
         base_url="https://api.proxyapi.ru/openai/v1",
     )
 
