@@ -13,7 +13,7 @@
 
 **Загрузка**
 
-git clone https://github.com/PrakticaProizvod/python-GPT-GUI
+```python git clone https://github.com/PrakticaProizvod/python-GPT-GUI```
 
 далее вставляем в файл .env в переменную key свой api ключ, который получили
 
