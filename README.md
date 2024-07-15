@@ -17,6 +17,6 @@
 
 далее вставляем в файл .env в переменную key свой api ключ, который получили
 
-pip3 install -r requirements.txt
+``` python pip3 install -r requirements.txt```
 
-python main.py
+```python python main.py```
